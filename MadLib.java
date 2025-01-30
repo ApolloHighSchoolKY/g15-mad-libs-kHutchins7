@@ -1,4 +1,4 @@
-//© A+ Computer Science  -  www.apluscompsci.com
+//ï¿½ A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
 //Class -
@@ -20,15 +20,49 @@ public class MadLib
 
 	public MadLib()
 	{
+		verbs.add("punched");
+		nouns.add("Wal-Mart");
+		adjectives.add("Massive");
+		story="I punched Wal-Mart in a Massive way.";
 
 	}
 
 	public MadLib(String fileName)
 	{
 		//load stuff
+		loadNouns();
+		loadAdjectives();
+		loadVerbs();
+
+		
 
 		try
 		{
+			Scanner read = new Scanner(new File("story.dat"));
+			Scanner chopper = new Scanner(story);
+			String word ="";
+			while(read.hasNext());
+			{
+				word=read.next();
+				if(word.equals("&"))
+				{
+					story+= getRandomAdjective();
+				}
+				else if(word.equals("@"))
+				{
+					story+= getRandomVerb();
+				}
+				else if(word.equals("#"))
+				{
+					story+= getRandomNoun();
+				}
+				else
+				{
+					story += story;
+				}
+				read.close();
+				chopper.close();
+			}
 			//Read the different parts of the story and concatenate the resulting
 			//story using the symbols to tell you the parts of speech
 
@@ -37,7 +71,7 @@ public class MadLib
 
 				//If what was read in is one of the symbols, find a random
 				//word to replace it.
-			}
+			
 
 
 		}
@@ -52,6 +86,12 @@ public class MadLib
 	{
 		try
 		{
+			Scanner reader = new Scanner(new File("nouns.dat"));
+			while (reader.hasNext())
+			{
+				nouns.add(reader.next());
+			}
+			reader.close();
 
 		}
 		catch(Exception e)
@@ -65,6 +105,12 @@ public class MadLib
 	{
 		try
 		{
+			Scanner readerer = new Scanner(new File("verbs.dat"));
+			while (readerer.hasNext())
+			{
+				verbs.add(readerer.next());
+			}
+			readerer.close();
 
 		}
 		catch(Exception e)
@@ -77,6 +123,12 @@ public class MadLib
 	{
 		try
 		{
+			Scanner readererer = new Scanner(new File("adjectives.dat"));
+			while (readererer.hasNext())
+			{
+				adjectives.add(readererer.next());
+			}
+			readererer.close();
 
 		}
 		catch(Exception e)
@@ -87,21 +139,27 @@ public class MadLib
 
 	public String getRandomVerb()
 	{
-		return "";
+		int spot = (int)(Math.random()*verbs.size());
+
+		return ""+ verbs.get(spot);
 	}
 
 	public String getRandomNoun()
 	{
-		return "";
+		int spot = (int)(Math.random()*nouns.size());
+
+		return ""+ nouns.get(spot);
 	}
 
 	public String getRandomAdjective()
 	{
-		return "";
+		int spot = (int)(Math.random()*adjectives.size());
+
+		return ""+ adjectives.get(spot);
 	}
 
 	public String toString()
 	{
-		return "";
+		return "" + story;
 	}
 }
